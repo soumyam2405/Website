@@ -1,0 +1,110 @@
+(window["webpackJsonp_N_E"] = window["webpackJsonp_N_E"] || []).push([[176],{
+
+/***/ "./node_modules/highlight.js/lib/languages/tp.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/highlight.js/lib/languages/tp.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+Language: TP
+Author: Jay Strybis <jay.strybis@gmail.com>
+Description: FANUC TP programming language (TPP).
+*/
+
+function tp(hljs) {
+  const TPID = {
+    className: 'number',
+    begin: '[1-9][0-9]*', /* no leading zeros */
+    relevance: 0
+  };
+  const TPLABEL = {
+    className: 'symbol',
+    begin: ':[^\\]]+'
+  };
+  const TPDATA = {
+    className: 'built_in',
+    begin: '(AR|P|PAYLOAD|PR|R|SR|RSR|LBL|VR|UALM|MESSAGE|UTOOL|UFRAME|TIMER|' +
+    'TIMER_OVERFLOW|JOINT_MAX_SPEED|RESUME_PROG|DIAG_REC)\\[',
+    end: '\\]',
+    contains: [
+      'self',
+      TPID,
+      TPLABEL
+    ]
+  };
+  const TPIO = {
+    className: 'built_in',
+    begin: '(AI|AO|DI|DO|F|RI|RO|UI|UO|GI|GO|SI|SO)\\[',
+    end: '\\]',
+    contains: [
+      'self',
+      TPID,
+      hljs.QUOTE_STRING_MODE, /* for pos section at bottom */
+      TPLABEL
+    ]
+  };
+
+  return {
+    name: 'TP',
+    keywords: {
+      keyword:
+        'ABORT ACC ADJUST AND AP_LD BREAK CALL CNT COL CONDITION CONFIG DA DB ' +
+        'DIV DETECT ELSE END ENDFOR ERR_NUM ERROR_PROG FINE FOR GP GUARD INC ' +
+        'IF JMP LINEAR_MAX_SPEED LOCK MOD MONITOR OFFSET Offset OR OVERRIDE ' +
+        'PAUSE PREG PTH RT_LD RUN SELECT SKIP Skip TA TB TO TOOL_OFFSET ' +
+        'Tool_Offset UF UT UFRAME_NUM UTOOL_NUM UNLOCK WAIT X Y Z W P R STRLEN ' +
+        'SUBSTR FINDSTR VOFFSET PROG ATTR MN POS',
+      literal:
+        'ON OFF max_speed LPOS JPOS ENABLE DISABLE START STOP RESET'
+    },
+    contains: [
+      TPDATA,
+      TPIO,
+      {
+        className: 'keyword',
+        begin: '/(PROG|ATTR|MN|POS|END)\\b'
+      },
+      {
+        /* this is for cases like ,CALL */
+        className: 'keyword',
+        begin: '(CALL|RUN|POINT_LOGIC|LBL)\\b'
+      },
+      {
+        /* this is for cases like CNT100 where the default lexemes do not
+         * separate the keyword and the number */
+        className: 'keyword',
+        begin: '\\b(ACC|CNT|Skip|Offset|PSPD|RT_LD|AP_LD|Tool_Offset)'
+      },
+      {
+        /* to catch numbers that do not have a word boundary on the left */
+        className: 'number',
+        begin: '\\d+(sec|msec|mm/sec|cm/min|inch/min|deg/sec|mm|in|cm)?\\b',
+        relevance: 0
+      },
+      hljs.COMMENT('//', '[;$]'),
+      hljs.COMMENT('!', '[;$]'),
+      hljs.COMMENT('--eg:', '$'),
+      hljs.QUOTE_STRING_MODE,
+      {
+        className: 'string',
+        begin: '\'',
+        end: '\''
+      },
+      hljs.C_NUMBER_MODE,
+      {
+        className: 'variable',
+        begin: '\\$[A-Za-z0-9_]+'
+      }
+    ]
+  };
+}
+
+module.exports = tp;
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9fTl9FLy4vbm9kZV9tb2R1bGVzL2hpZ2hsaWdodC5qcy9saWIvbGFuZ3VhZ2VzL3RwLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxLQUFLO0FBQ0w7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsT0FBTztBQUNQO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsT0FBTztBQUNQO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxPQUFPO0FBQ1A7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLE9BQU87QUFDUCw0QkFBNEI7QUFDNUIsMkJBQTJCO0FBQzNCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLE9BQU87QUFDUDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBIiwiZmlsZSI6InN0YXRpYy9jaHVua3MvMTc2LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLypcbkxhbmd1YWdlOiBUUFxuQXV0aG9yOiBKYXkgU3RyeWJpcyA8amF5LnN0cnliaXNAZ21haWwuY29tPlxuRGVzY3JpcHRpb246IEZBTlVDIFRQIHByb2dyYW1taW5nIGxhbmd1YWdlIChUUFApLlxuKi9cblxuZnVuY3Rpb24gdHAoaGxqcykge1xuICBjb25zdCBUUElEID0ge1xuICAgIGNsYXNzTmFtZTogJ251bWJlcicsXG4gICAgYmVnaW46ICdbMS05XVswLTldKicsIC8qIG5vIGxlYWRpbmcgemVyb3MgKi9cbiAgICByZWxldmFuY2U6IDBcbiAgfTtcbiAgY29uc3QgVFBMQUJFTCA9IHtcbiAgICBjbGFzc05hbWU6ICdzeW1ib2wnLFxuICAgIGJlZ2luOiAnOlteXFxcXF1dKydcbiAgfTtcbiAgY29uc3QgVFBEQVRBID0ge1xuICAgIGNsYXNzTmFtZTogJ2J1aWx0X2luJyxcbiAgICBiZWdpbjogJyhBUnxQfFBBWUxPQUR8UFJ8UnxTUnxSU1J8TEJMfFZSfFVBTE18TUVTU0FHRXxVVE9PTHxVRlJBTUV8VElNRVJ8JyArXG4gICAgJ1RJTUVSX09WRVJGTE9XfEpPSU5UX01BWF9TUEVFRHxSRVNVTUVfUFJPR3xESUFHX1JFQylcXFxcWycsXG4gICAgZW5kOiAnXFxcXF0nLFxuICAgIGNvbnRhaW5zOiBbXG4gICAgICAnc2VsZicsXG4gICAgICBUUElELFxuICAgICAgVFBMQUJFTFxuICAgIF1cbiAgfTtcbiAgY29uc3QgVFBJTyA9IHtcbiAgICBjbGFzc05hbWU6ICdidWlsdF9pbicsXG4gICAgYmVnaW46ICcoQUl8QU98REl8RE98RnxSSXxST3xVSXxVT3xHSXxHT3xTSXxTTylcXFxcWycsXG4gICAgZW5kOiAnXFxcXF0nLFxuICAgIGNvbnRhaW5zOiBbXG4gICAgICAnc2VsZicsXG4gICAgICBUUElELFxuICAgICAgaGxqcy5RVU9URV9TVFJJTkdfTU9ERSwgLyogZm9yIHBvcyBzZWN0aW9uIGF0IGJvdHRvbSAqL1xuICAgICAgVFBMQUJFTFxuICAgIF1cbiAgfTtcblxuICByZXR1cm4ge1xuICAgIG5hbWU6ICdUUCcsXG4gICAga2V5d29yZHM6IHtcbiAgICAgIGtleXdvcmQ6XG4gICAgICAgICdBQk9SVCBBQ0MgQURKVVNUIEFORCBBUF9MRCBCUkVBSyBDQUxMIENOVCBDT0wgQ09ORElUSU9OIENPTkZJRyBEQSBEQiAnICtcbiAgICAgICAgJ0RJViBERVRFQ1QgRUxTRSBFTkQgRU5ERk9SIEVSUl9OVU0gRVJST1JfUFJPRyBGSU5FIEZPUiBHUCBHVUFSRCBJTkMgJyArXG4gICAgICAgICdJRiBKTVAgTElORUFSX01BWF9TUEVFRCBMT0NLIE1PRCBNT05JVE9SIE9GRlNFVCBPZmZzZXQgT1IgT1ZFUlJJREUgJyArXG4gICAgICAgICdQQVVTRSBQUkVHIFBUSCBSVF9MRCBSVU4gU0VMRUNUIFNLSVAgU2tpcCBUQSBUQiBUTyBUT09MX09GRlNFVCAnICtcbiAgICAgICAgJ1Rvb2xfT2Zmc2V0IFVGIFVUIFVGUkFNRV9OVU0gVVRPT0xfTlVNIFVOTE9DSyBXQUlUIFggWSBaIFcgUCBSIFNUUkxFTiAnICtcbiAgICAgICAgJ1NVQlNUUiBGSU5EU1RSIFZPRkZTRVQgUFJPRyBBVFRSIE1OIFBPUycsXG4gICAgICBsaXRlcmFsOlxuICAgICAgICAnT04gT0ZGIG1heF9zcGVlZCBMUE9TIEpQT1MgRU5BQkxFIERJU0FCTEUgU1RBUlQgU1RPUCBSRVNFVCdcbiAgICB9LFxuICAgIGNvbnRhaW5zOiBbXG4gICAgICBUUERBVEEsXG4gICAgICBUUElPLFxuICAgICAge1xuICAgICAgICBjbGFzc05hbWU6ICdrZXl3b3JkJyxcbiAgICAgICAgYmVnaW46ICcvKFBST0d8QVRUUnxNTnxQT1N8RU5EKVxcXFxiJ1xuICAgICAgfSxcbiAgICAgIHtcbiAgICAgICAgLyogdGhpcyBpcyBmb3IgY2FzZXMgbGlrZSAsQ0FMTCAqL1xuICAgICAgICBjbGFzc05hbWU6ICdrZXl3b3JkJyxcbiAgICAgICAgYmVnaW46ICcoQ0FMTHxSVU58UE9JTlRfTE9HSUN8TEJMKVxcXFxiJ1xuICAgICAgfSxcbiAgICAgIHtcbiAgICAgICAgLyogdGhpcyBpcyBmb3IgY2FzZXMgbGlrZSBDTlQxMDAgd2hlcmUgdGhlIGRlZmF1bHQgbGV4ZW1lcyBkbyBub3RcbiAgICAgICAgICogc2VwYXJhdGUgdGhlIGtleXdvcmQgYW5kIHRoZSBudW1iZXIgKi9cbiAgICAgICAgY2xhc3NOYW1lOiAna2V5d29yZCcsXG4gICAgICAgIGJlZ2luOiAnXFxcXGIoQUNDfENOVHxTa2lwfE9mZnNldHxQU1BEfFJUX0xEfEFQX0xEfFRvb2xfT2Zmc2V0KSdcbiAgICAgIH0sXG4gICAgICB7XG4gICAgICAgIC8qIHRvIGNhdGNoIG51bWJlcnMgdGhhdCBkbyBub3QgaGF2ZSBhIHdvcmQgYm91bmRhcnkgb24gdGhlIGxlZnQgKi9cbiAgICAgICAgY2xhc3NOYW1lOiAnbnVtYmVyJyxcbiAgICAgICAgYmVnaW46ICdcXFxcZCsoc2VjfG1zZWN8bW0vc2VjfGNtL21pbnxpbmNoL21pbnxkZWcvc2VjfG1tfGlufGNtKT9cXFxcYicsXG4gICAgICAgIHJlbGV2YW5jZTogMFxuICAgICAgfSxcbiAgICAgIGhsanMuQ09NTUVOVCgnLy8nLCAnWzskXScpLFxuICAgICAgaGxqcy5DT01NRU5UKCchJywgJ1s7JF0nKSxcbiAgICAgIGhsanMuQ09NTUVOVCgnLS1lZzonLCAnJCcpLFxuICAgICAgaGxqcy5RVU9URV9TVFJJTkdfTU9ERSxcbiAgICAgIHtcbiAgICAgICAgY2xhc3NOYW1lOiAnc3RyaW5nJyxcbiAgICAgICAgYmVnaW46ICdcXCcnLFxuICAgICAgICBlbmQ6ICdcXCcnXG4gICAgICB9LFxuICAgICAgaGxqcy5DX05VTUJFUl9NT0RFLFxuICAgICAge1xuICAgICAgICBjbGFzc05hbWU6ICd2YXJpYWJsZScsXG4gICAgICAgIGJlZ2luOiAnXFxcXCRbQS1aYS16MC05X10rJ1xuICAgICAgfVxuICAgIF1cbiAgfTtcbn1cblxubW9kdWxlLmV4cG9ydHMgPSB0cDtcbiJdLCJzb3VyY2VSb290IjoiIn0=
